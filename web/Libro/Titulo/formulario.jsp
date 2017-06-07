@@ -4,6 +4,9 @@
     Author     : Ramon Paris
 --%>
 
+<%@page import="model.dto.Autor"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.dao.AutorDAO"%>
 <%@page import="model.dao.TituloDAO"%>
 <%@page import="model.dto.Titulo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -41,7 +44,23 @@
                     <label>Precio referencial</label> 
                     <input class="form-control" type="number" name="precio" value="<%=t.getPrecioReferencia() %>">
                 </div>           
-                
+                <div class="form-group">
+                    <label>Número de páginas</label> 
+                    <input class="form-control" type="number" name="nro" value="<%=t.getPrecioReferencia() %>">
+                </div>           
+                <div class="form-group"> 
+                    <label>Autor</label> 
+                    <select name="idUsuario" class="form-control">                        
+                        <option value=""> </option>
+                        <%  
+                            AutorDAO autor = new AutorDAO();
+                            ArrayList<Autor> listaAutor = autor.listar();
+                            for(Autor a : listaAutor){ 
+                        %>
+                        <option value="<%=a.getIdAutor() %>" name="idAutor" required><%=a.getNombre() %> <%=a.getApePat() %> <%=a.getApeMat() %></option>
+                        <% } %>
+                    </select>
+                </div>
                 <input type="submit" class="form-control btn btn-success">
 
             </form>
