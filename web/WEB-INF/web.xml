@@ -33,6 +33,10 @@
         <servlet-class>controller.EditorialServlet</servlet-class>
     </servlet>
     <!--****************************** TITULO **********************************************-->
+    <servlet>
+        <servlet-name>MetodoPagoServlet</servlet-name>
+        <servlet-class>controller.MetodoPagoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TituloServlet</servlet-name>
         <url-pattern>/Titulo/listar</url-pattern>
@@ -75,7 +79,6 @@
         <url-pattern>/Autor/buscar</url-pattern>
     </servlet-mapping>
     <!--****************************** PUBLICACION **********************************************-->
-    
     <servlet-mapping>
         <servlet-name>PublicacionServlet</servlet-name>
         <url-pattern>/Publicacion/listar</url-pattern>
@@ -180,7 +183,6 @@
         <servlet-name>EstadoServlet</servlet-name>
         <url-pattern>/Estado/buscar</url-pattern>
     </servlet-mapping>
-    
     <!-- **********************************EDITORIAL***************************************************-->
     <servlet-mapping>
         <servlet-name>EditorialServlet</servlet-name>
@@ -201,6 +203,27 @@
     <servlet-mapping>
         <servlet-name>EditorialServlet</servlet-name>
         <url-pattern>/Editorial/buscar</url-pattern>
+    </servlet-mapping>
+    <!-- *************************************METODO PAGO************************************-->
+    <servlet-mapping>
+        <servlet-name>MetodoPagoServlet</servlet-name>
+        <url-pattern>/MetodoPago/listar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MetodoPagoServlet</servlet-name>
+        <url-pattern>/MetodoPago/insertar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MetodoPagoServlet</servlet-name>
+        <url-pattern>/MetodoPago/modificar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MetodoPagoServlet</servlet-name>
+        <url-pattern>/MetodoPago/eliminar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MetodoPagoServlet</servlet-name>
+        <url-pattern>/MetodoPago/buscar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

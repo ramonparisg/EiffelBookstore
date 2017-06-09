@@ -12,15 +12,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.dao.LibroDAO;
-import model.dto.Libro;
+import model.dao.AuxiliarDAO;
+import model.dto.Auxiliar;
 import util.Ayudante;
 
 /**
  *
  * @author Ramon Paris
  */
-public class LibroServlet extends HttpServlet {
+public class MetodoPagoServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,40 +35,44 @@ public class LibroServlet extends HttpServlet {
             throws ServletException, IOException {
         String ruta = request.getRequestURI();
         String accion = Ayudante.getAccion(ruta);
-        LibroDAO dao = new LibroDAO();
-        Libro l;
-        ArrayList<Libro> lista = new ArrayList<Libro>();
+        AuxiliarDAO dao = new AuxiliarDAO();
+        Auxiliar categoria;
+        ArrayList<Auxiliar> lista = new ArrayList<Auxiliar>();
+        String tabla = "metodo_pago";
         switch(accion){
             case "listar":
-                lista = dao.listar();
-                request.setAttribute("lista", lista);                
-                request.getRequestDispatcher("../Libro/index.jsp").forward(request, response);
+                lista = dao.listar(tabla);
+                request.setAttribute("lista", lista);
+                request.setAttribute("tabla", "MetodoPago");
+                request.getRequestDispatcher("../Libro/Titulo/Auxiliar/index.jsp").forward(request, response);
                 break;
             case "insertar":
-                l = new Libro();
-                l.setIsbn(request.getParameter("isbn"));
-                l.setNroSerie(Integer.parseInt(request.getParameter("nro")));
-                l.setIdEstado(Integer.parseInt(request.getParameter("idEstado")));
-                if (dao.insertar(l)>0){
-                    response.sendRedirect(request.getContextPath()+"/Libro/listar");
-                }
+                categoria = new Auxiliar();
+                categoria.setDetalle(request.getParameter("detalle"));
+                if (dao.agregar(categoria, tabla) >0){
+                    response.sendRedirect(("../MetodoPago/listar"));
+                }else
+                    request.getRequestDispatcher(request.getContextPath()+"/Error.jsp").forward(request, response);
                 break;
             case "modificar":
-                l = new Libro();
-                l.setIsbn(request.getParameter("isbn"));
-                l.setNroSerie(Integer.parseInt(request.getParameter("nro")));
-                l.setIdEstado(Integer.parseInt(request.getParameter("idEstado")));
-                if (dao.modificar(l)>0){
-                    response.sendRedirect(request.getContextPath()+"/Libro/listar");
-                }
+                categoria = new Auxiliar();
+                categoria.setId(Integer.parseInt(request.getParameter("id")));
+                categoria.setDetalle(request.getParameter("detalle"));
+                if (dao.modificar(categoria, tabla) >0){
+                    response.sendRedirect(("../MetodoPago/listar"));
+                }else
+                    request.getRequestDispatcher(request.getContextPath()+"/Error.jsp").forward(request, response);
                 break;
             case "eliminar":
-                if (dao.eliminar(request.getParameter("id"))>0){
-                    response.sendRedirect(request.getContextPath()+"/Libro/listar");
-                }
+                int id = Integer.parseInt(request.getParameter("id"));
+                int res = dao.eliminar(id,tabla);
+                if (res >0){
+                    response.sendRedirect(("../MetodoPago/listar"));
+                }else{
+                    request.getRequestDispatcher("../Error.jsp").forward(request, response);
+                }                
                 break;
         }
-            
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

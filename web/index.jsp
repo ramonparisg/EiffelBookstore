@@ -20,7 +20,9 @@
             <li><a href="Editorial/listar">Editorial</a></li>
             <li><a href="Publicacion/listar">Publicación</a></li>
             <li><a href="Titulo/listar">Titulo</a></li>
-            <li><a href="libro.jsp">Libro</a></li>
+            <li><a href="Estado/listar">Estado</a></li>
+            <li><a href="Libro/listar">Libro</a></li>
+            <li><a href="MetodoPago/listar">Método Pago</a></li>
         </ul>
         
     </body>

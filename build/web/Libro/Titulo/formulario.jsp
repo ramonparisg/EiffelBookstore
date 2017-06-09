@@ -21,7 +21,7 @@
 %>
 <html>
     <head>                
-        <title><%=accion%> autor</title>
+        <title><%=accion%> libro</title>
         <jsp:include page="../../template.jsp" />
     </head>
     
@@ -34,7 +34,7 @@
             }
         %>
         
-        <h1 class="text-center"><%=accion %> Autor</h1>
+        <h1 class="text-center"><%=accion %> libro</h1>
         <div class="container">
             <form method="post" action="<%=request.getContextPath()%>/Titulo/<%=accion %>">
                 <div class="form-group">

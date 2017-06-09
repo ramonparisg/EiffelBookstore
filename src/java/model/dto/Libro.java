@@ -12,12 +12,12 @@ package model.dto;
 public class Libro {
     private int nroSerie;
     private int idEstado;
-    private int isbn;
+    private String isbn;
 
     public Libro() {
     }
 
-    public Libro(int nroSerie, int idEstado, int isbn) {
+    public Libro(int nroSerie, int idEstado, String isbn) {
         this.nroSerie = nroSerie;
         this.idEstado = idEstado;
         this.isbn = isbn;
@@ -39,12 +39,14 @@ public class Libro {
         this.idEstado = idEstado;
     }
 
-    public int getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(int isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
+
+    
     
 }

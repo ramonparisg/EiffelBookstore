@@ -38,14 +38,14 @@ public class LibroDAO {
         return res;
     }
     
-    public int eliminar(int id){
+    public int eliminar(String id){
         int res =0;
         String q = "delete from libro where nro_serie="+id;
         res = c.ejecutarSQL(q);       
         return res;
     }
     
-    public Libro buscar(int id){
+    public Libro buscar(String id){
         Libro l=null;
         ResultSet rs;
         String q = "Select * from libro where nro_serie="+id;
@@ -55,7 +55,7 @@ public class LibroDAO {
                 l = new Libro();
                 l.setNroSerie(rs.getInt(1));
                 l.setIdEstado(rs.getInt(2));
-                l.setIsbn(rs.getInt(3));                
+                l.setIsbn(rs.getString(3));                
             }
         } catch (SQLException ex) {
             Logger.getLogger(LibroDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,7 +74,7 @@ public class LibroDAO {
                 l = new Libro();
                 l.setNroSerie(rs.getInt(1));
                 l.setIdEstado(rs.getInt(2));
-                l.setIsbn(rs.getInt(3)); 
+                l.setIsbn(rs.getString(3)); 
                 lista.add(l);
             }
             return lista;

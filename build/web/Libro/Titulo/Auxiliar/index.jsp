@@ -38,7 +38,7 @@
                         <td><%=a.getId() %></td>
                         <td><%=a.getDetalle() %></td>                       
                         <td>
-                        <a href="<%=request.getContextPath() %>/Libro/Auxiliar/formulario.jsp?accion=modificar&id=<%=a.getId() %>&tabla=<%=tabla %>" class="btn btn-warning"><spam class="glyphicon glyphicon-pencil"></spam></a>
+                        <a href="<%=request.getContextPath() %>/Libro/Titulo/Auxiliar/formulario.jsp?accion=modificar&id=<%=a.getId() %>&tabla=<%=tabla %>" class="btn btn-warning"><spam class="glyphicon glyphicon-pencil"></spam></a>
                         <a href="<%=request.getContextPath()%>/<%=tabla%>/eliminar?id=<%=a.getId() %>" class="btn btn-danger"><spam class="glyphicon glyphicon-remove"></spam></a> 
                         </td> 
                     </tbody>

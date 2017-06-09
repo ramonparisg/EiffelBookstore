@@ -22,15 +22,21 @@
     <body>
         <% 
             Auxiliar a = new Auxiliar();
-            AuxiliarDAO dao = new AuxiliarDAO();            
-            if (request.getParameter("id")!=null){                
-                a = dao.buscar(Integer.parseInt(request.getParameter("id")),tabla);
-            }
+            AuxiliarDAO dao = new AuxiliarDAO();  
+            
         %>
         
         <h1 class="text-center"><%=accion %> <%=tabla%></h1>
         <div class="container">
             <form method="post" action="<%=request.getContextPath()%>/<%=tabla%>/<%=accion %>">
+                <% 
+                    if (tabla.equalsIgnoreCase("MetodoPago") ){
+                        tabla = "metodo_pago";
+                    }
+                    if (request.getParameter("id")!=null){                
+                        a = dao.buscar(Integer.parseInt(request.getParameter("id")),tabla);
+                    }
+                %>
                 <div class="form-group">
                     <label>Detalle</label> 
                     <input class="form-control" type="text" name="detalle" value="<%=a.getDetalle()%>" required>

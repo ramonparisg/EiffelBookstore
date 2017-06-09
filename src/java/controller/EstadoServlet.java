@@ -7,11 +7,15 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.dao.AuxiliarDAO;
+import model.dto.Auxiliar;
 import model.dto.Titulo;
+import util.Ayudante;
 
 /**
  *
@@ -30,7 +34,46 @@ public class EstadoServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        String ruta = request.getRequestURI();
+        String accion = Ayudante.getAccion(ruta);
+        AuxiliarDAO dao = new AuxiliarDAO();
+        Auxiliar categoria;
+        ArrayList<Auxiliar> lista = new ArrayList<Auxiliar>();
+        String tabla = "Estado";
+        switch(accion){
+            case "listar":
+                lista = dao.listar(tabla);
+                request.setAttribute("lista", lista);
+                request.setAttribute("tabla", tabla);
+                request.getRequestDispatcher("../Libro/Titulo/Auxiliar/index.jsp").forward(request, response);
+                break;
+            case "insertar":
+                categoria = new Auxiliar();
+                categoria.setDetalle(request.getParameter("detalle"));
+                if (dao.agregar(categoria, tabla) >0){
+                    response.sendRedirect(("../"+tabla+"/listar"));
+                }else
+                    request.getRequestDispatcher(request.getContextPath()+"/Error.jsp").forward(request, response);
+                break;
+            case "modificar":
+                categoria = new Auxiliar();
+                categoria.setId(Integer.parseInt(request.getParameter("id")));
+                categoria.setDetalle(request.getParameter("detalle"));
+                if (dao.modificar(categoria, tabla) >0){
+                    response.sendRedirect(("../"+tabla+"/listar"));
+                }else
+                    request.getRequestDispatcher(request.getContextPath()+"/Error.jsp").forward(request, response);
+                break;
+            case "eliminar":
+                int id = Integer.parseInt(request.getParameter("id"));
+                int res = dao.eliminar(id,tabla);
+                if (res >0){
+                    response.sendRedirect(("../"+tabla+"/listar"));
+                }else{
+                    request.getRequestDispatcher("../Error.jsp").forward(request, response);
+                }                
+                break;
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
