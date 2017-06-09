@@ -25,7 +25,8 @@
             <p><a href="<%=request.getContextPath() %>/Libro/Titulo/formulario.jsp?accion=insertar" class="glyphicon glyphicon-plus btn btn-success" ></a></p>
             <table class="table">
                 <thead>
-                    <th>ISBN</th>                    
+                    <th>ISBN</th>    
+                    <th>Nombre</th>
                     <th>Año de publicación</th>
                     <th>Precio referencial</th>
                     <th>Número de Páginas</th>
@@ -37,6 +38,7 @@
                     <% for (Titulo t : lista){%>
                     <tbody>
                         <td><%=t.getIsbn() %></td>
+                        <td><%=t.getNombre() %></td>
                         <td><%=t.getAnyoPublicacion() %></td>
                         <td><%=t.getPrecioReferencia() %></td>
                         <td><%=t.getNroPaginas() %></td>
@@ -44,7 +46,7 @@
                         <td><%=t.getIdPublicacion() %></td>      
                         
                         <td>
-                        <a href="<%=request.getContextPath() %>/Libro/Autor/formulario.jsp?accion=modificar&id=<%=t.getIsbn() %>" class="btn btn-warning"><spam class="glyphicon glyphicon-pencil"></spam></a>
+                        <a href="<%=request.getContextPath() %>/Libro/Titulo/formulario.jsp?accion=modificar&id=<%=t.getIsbn() %>" class="btn btn-warning"><spam class="glyphicon glyphicon-pencil"></spam></a>
                         <a href="<%=request.getContextPath()%>/Autor/eliminar?id=<%=t.getIsbn() %>" class="btn btn-danger"><spam class="glyphicon glyphicon-remove"></spam></a> 
                         </td> 
                     </tbody>

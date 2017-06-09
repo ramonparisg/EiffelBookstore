@@ -25,7 +25,7 @@
         
         <h1 class="text-center"><%=tabla %> </h1>
         <div class="container">
-            <p><a href="<%=request.getContextPath() %>/Libro/Auxiliar/formulario.jsp?accion=insertar&tabla=<%=tabla %>" class="glyphicon glyphicon-plus btn btn-success" ></a></p>
+            <p><a href="<%=request.getContextPath() %>/Libro/Titulo/Auxiliar/formulario.jsp?accion=insertar&tabla=<%=tabla %>" class="glyphicon glyphicon-plus btn btn-success" ></a></p>
             <table class="table">
                 <thead>
                     <th>ID</th>

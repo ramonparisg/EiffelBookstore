@@ -45,10 +45,41 @@ public class TituloServlet extends HttpServlet {
                 request.getRequestDispatcher("../Libro/Titulo/index.jsp").forward(request, response);
                 break;
             case "insertar":
-                
+                t = new Titulo();
+                t.setIsbn((request.getParameter("isbn")));
+                t.setNombre(request.getParameter("nombre"));
+                t.setAnyoPublicacion(request.getParameter("anyo"));
+                t.setIdEditorial(Integer.parseInt(request.getParameter("idEditorial")));
+                t.setIdPublicacion(Integer.parseInt(request.getParameter("idPublicacion")));
+                t.setNroPaginas(Integer.parseInt(request.getParameter("nro")));
+                t.setPrecioReferencia(Integer.parseInt(request.getParameter("precio")));
+                if (dao.insertar(t)>0){
+                    dao.insertarMuchosAMuchos("autor", Integer.parseInt(request.getParameter("idAutor")), t.getIsbn());
+                    dao.insertarMuchosAMuchos("idioma", Integer.parseInt(request.getParameter("idIdioma")), t.getIsbn());
+                    dao.insertarMuchosAMuchos("categoria", Integer.parseInt(request.getParameter("idCategoria")), t.getIsbn());
+                    response.sendRedirect(request.getContextPath()+"/Titulo/listar");
+                }else
+                    request.getRequestDispatcher("../Error.jsp").forward(request, response);
                 break;
-                    
+            case "modificar":
+                t = new Titulo();
+                t.setIsbn((request.getParameter("isbn")));
+                t.setNombre(request.getParameter("nombre"));
+                t.setAnyoPublicacion(request.getParameter("anyo"));
+                t.setIdEditorial(Integer.parseInt(request.getParameter("idEditorial")));
+                t.setIdPublicacion(Integer.parseInt(request.getParameter("idPublicacion")));
+                t.setNroPaginas(Integer.parseInt(request.getParameter("nro")));
+                t.setPrecioReferencia(Integer.parseInt(request.getParameter("precio")));
+                if (dao.modificar(t)>0){
+                    dao.modificarMuchosAMuchos("autor", Integer.parseInt(request.getParameter("idAutor")), t.getIsbn());
+                    dao.modificarMuchosAMuchos("idioma", Integer.parseInt(request.getParameter("idIdioma")), t.getIsbn());
+                    dao.modificarMuchosAMuchos("categoria", Integer.parseInt(request.getParameter("idCategoria")), t.getIsbn());
+                    response.sendRedirect(request.getContextPath()+"/Titulo/listar");
+                }else
+                    request.getRequestDispatcher("../Error.jsp").forward(request, response);
+                break;
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

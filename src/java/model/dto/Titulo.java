@@ -10,7 +10,8 @@ package model.dto;
  * @author Ramon Paris
  */
 public class Titulo {
-    private int isbn;
+    private String isbn;
+    private String nombre;
     private String anyoPublicacion;
     private int precioReferencia;
     private int nroPaginas;
@@ -18,7 +19,8 @@ public class Titulo {
     private int idPublicacion;
 
     public Titulo() {
-        this.isbn=0;
+        this.isbn="";
+        this.nombre="";
         this.anyoPublicacion="";
         this.precioReferencia=0;
         this.nroPaginas=0;
@@ -26,8 +28,9 @@ public class Titulo {
         this.idPublicacion=0;
     }
 
-    public Titulo(int isbn, String anyoPublicacion, int precioReferencia, int nroPaginas, int idEditorial, int idPublicacion) {
+    public Titulo(String isbn, String nombre, String anyoPublicacion, int precioReferencia, int nroPaginas, int idEditorial, int idPublicacion) {
         this.isbn = isbn;
+        this.nombre = nombre;
         this.anyoPublicacion = anyoPublicacion;
         this.precioReferencia = precioReferencia;
         this.nroPaginas = nroPaginas;
@@ -35,12 +38,20 @@ public class Titulo {
         this.idPublicacion = idPublicacion;
     }
 
-    public int getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(int isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getAnyoPublicacion() {
@@ -82,6 +93,8 @@ public class Titulo {
     public void setIdPublicacion(int idPublicacion) {
         this.idPublicacion = idPublicacion;
     }
+
+    
     
     
     
