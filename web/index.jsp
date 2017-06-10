@@ -23,6 +23,8 @@
             <li><a href="Estado/listar">Estado</a></li>
             <li><a href="Libro/listar">Libro</a></li>
             <li><a href="MetodoPago/listar">Método Pago</a></li>
+            <li><a href="Distribuidor/listar">Distribuidor</a></li>
+            <li><a href="Factura/listar">Factura</a></li>
         </ul>
         
     </body>

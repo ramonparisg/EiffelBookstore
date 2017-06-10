@@ -37,6 +37,18 @@
         <servlet-name>MetodoPagoServlet</servlet-name>
         <servlet-class>controller.MetodoPagoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DistribuidorServlet</servlet-name>
+        <servlet-class>controller.DistribuidorServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FacturaServlet</servlet-name>
+        <servlet-class>controller.FacturaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CompraServlet</servlet-name>
+        <servlet-class>controller.CompraServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TituloServlet</servlet-name>
         <url-pattern>/Titulo/listar</url-pattern>
@@ -224,6 +236,52 @@
     <servlet-mapping>
         <servlet-name>MetodoPagoServlet</servlet-name>
         <url-pattern>/MetodoPago/buscar</url-pattern>
+    </servlet-mapping>
+    <!-- *************************************DISTRIBUIDOR************************************-->
+    <servlet-mapping>
+        <servlet-name>DistribuidorServlet</servlet-name>
+        <url-pattern>/Distribuidor/listar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DistribuidorServlet</servlet-name>
+        <url-pattern>/Distribuidor/insertar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DistribuidorServlet</servlet-name>
+        <url-pattern>/Distribuidor/modificar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DistribuidorServlet</servlet-name>
+        <url-pattern>/Distribuidor/eliminar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DistribuidorServlet</servlet-name>
+        <url-pattern>/Distribuidor/buscar</url-pattern>
+    </servlet-mapping>
+    <!-- *************************************FACTURA************************************-->
+    <servlet-mapping>
+        <servlet-name>FacturaServlet</servlet-name>
+        <url-pattern>/Factura/listar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FacturaServlet</servlet-name>
+        <url-pattern>/Factura/insertar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FacturaServlet</servlet-name>
+        <url-pattern>/Factura/modificar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FacturaServlet</servlet-name>
+        <url-pattern>/Factura/eliminar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FacturaServlet</servlet-name>
+        <url-pattern>/Factura/buscar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CompraServlet</servlet-name>
+        <url-pattern>/Compra</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

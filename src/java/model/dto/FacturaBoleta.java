@@ -19,14 +19,21 @@ public class FacturaBoleta {
     private int metodoPago;
 
     public FacturaBoleta() {
+        this.folio = 0;
+        this.fechaCompra = "";
+        this.precioIva = 0;
+        this.precioNeto = 0;
+        this.iva = 19;
+        this.horaCompra = "";
+        this.metodoPago = 0;
     }
 
-    public FacturaBoleta(int folio, String fechaCompra, int precioIva, int precioNeto, int iva, String horaCompra, int metodoPago) {
+    public FacturaBoleta(int folio, String fechaCompra, int precioIva, int precioNeto, String horaCompra, int metodoPago) {
         this.folio = folio;
         this.fechaCompra = fechaCompra;
         this.precioIva = precioIva;
         this.precioNeto = precioNeto;
-        this.iva = iva;
+        this.iva = 19;
         this.horaCompra = horaCompra;
         this.metodoPago = metodoPago;
     }

@@ -38,11 +38,11 @@ public class DistribuidorDAO {
     
     public int modificar(Distribuidor d){
         int res =0;
-        String q = "update distribuidor nombre='"+d.getNombre()
+        String q = "update distribuidor set nombre='"+d.getNombre()
                 + "',direccion='"+d.getDireccion()
                 + "',telefono='"+d.getTelefono()
                 + "',anyos_venta="+d.getAnyo()
-                + " where rut="+d.getRut();        
+                + " where rut='"+d.getRut()+"'";        
         res = c.ejecutarSQL(q);
         return res;
     }

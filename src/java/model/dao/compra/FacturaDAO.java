@@ -39,7 +39,7 @@ public class FacturaDAO {
     
     public int modificar(FacturaBoleta f){
         int res =0;
-        String q ="update factura set"
+        String q ="update factura set "
                 + "f_compra='"+f.getFechaCompra()
                 + "',precio_iva="+f.getPrecioIva()
                 + ",iva="+f.getIva()

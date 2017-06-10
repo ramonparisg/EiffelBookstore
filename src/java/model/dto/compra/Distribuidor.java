@@ -25,6 +25,11 @@ public class Distribuidor {
     }
 
     public Distribuidor() {
+        this.rut = 0;
+        this.direccion = "";
+        this.telefono = "";
+        this.nombre = "";
+        this.anyo = 0;
     }
 
     public int getRut() {
