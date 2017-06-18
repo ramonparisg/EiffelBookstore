@@ -22,6 +22,8 @@
 <html>
     <head>                
         <title><%=accion%> libro</title>
+        <link href="<%=request.getContextPath() %>/js/multiple-select-master/multiple-select.css" rel="stylesheet"/>
+        
         <jsp:include page="../../template.jsp" />
     </head>
     
@@ -59,7 +61,7 @@
                 </div>           
                 <div class="form-group"> 
                     <label>Autor</label> 
-                    <select name="idAutor" class="form-control">    
+                    <select name="idAutor" class="" multiple="multiple">    
                         <option></option>
                         <%  
                             AutorDAO autor = new AutorDAO();
@@ -122,5 +124,12 @@
 
             </form>
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="<%=request.getContextPath() %>/js/multiple-select-master/multiple-select.js"></script>
+        <script>
+             $("select").multipleSelect({
+                filter: true
+            });
+        </script>
     </body>
 </html>

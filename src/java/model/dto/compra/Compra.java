@@ -5,6 +5,8 @@
  */
 package model.dto.compra;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Ramon Paris
@@ -14,15 +16,16 @@ public class Compra {
     private int nroSerie;
     private int rutDistribuidor;
     private int folio;
-
-    public Compra() {
-    }
+    ArrayList<DetalleCompra> detalle = new ArrayList<DetalleCompra>();
 
     public Compra(int id, int nroSerie, int rutDistribuidor, int folio) {
         this.id = id;
         this.nroSerie = nroSerie;
         this.rutDistribuidor = rutDistribuidor;
         this.folio = folio;
+    }
+
+    public Compra() {
     }
 
     public int getId() {
@@ -56,6 +59,15 @@ public class Compra {
     public void setFolio(int folio) {
         this.folio = folio;
     }
+
+    public ArrayList<DetalleCompra> getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(ArrayList<DetalleCompra> detalle) {
+        this.detalle = detalle;
+    }
+    
     
     
 }

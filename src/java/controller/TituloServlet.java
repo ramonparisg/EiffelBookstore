@@ -54,8 +54,7 @@ public class TituloServlet extends HttpServlet {
                 t.setNroPaginas(Integer.parseInt(request.getParameter("nro")));
                 t.setPrecioReferencia(Integer.parseInt(request.getParameter("precio")));
                 if (dao.insertar(t)>0){
-                    dao.insertarMuchosAMuchos("autor", Integer.parseInt(request.getParameter("idAutor")), t.getIsbn());
-                    dao.insertarMuchosAMuchos("idioma", Integer.parseInt(request.getParameter("idIdioma")), t.getIsbn());
+                    dao.insertarMuchosAMuchos("autor", Integer.parseInt(request.getParameter("idAutor")), t.getIsbn());                    
                     dao.insertarMuchosAMuchos("categoria", Integer.parseInt(request.getParameter("idCategoria")), t.getIsbn());
                     response.sendRedirect(request.getContextPath()+"/Titulo/listar");
                 }else
@@ -71,8 +70,7 @@ public class TituloServlet extends HttpServlet {
                 t.setNroPaginas(Integer.parseInt(request.getParameter("nro")));
                 t.setPrecioReferencia(Integer.parseInt(request.getParameter("precio")));
                 if (dao.modificar(t)>0){
-                    dao.modificarMuchosAMuchos("autor", Integer.parseInt(request.getParameter("idAutor")), t.getIsbn());
-                    dao.modificarMuchosAMuchos("idioma", Integer.parseInt(request.getParameter("idIdioma")), t.getIsbn());
+                    dao.modificarMuchosAMuchos("autor", Integer.parseInt(request.getParameter("idAutor")), t.getIsbn());                    
                     dao.modificarMuchosAMuchos("categoria", Integer.parseInt(request.getParameter("idCategoria")), t.getIsbn());
                     response.sendRedirect(request.getContextPath()+"/Titulo/listar");
                 }else

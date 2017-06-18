@@ -16,7 +16,8 @@ primary key (id_editorial)
 );
 
 create table titulo(
-isbn int,
+isbn bigint,
+nombre varchar(45),
 anyo_publicacion date,
 precio_referencia int,
 nro_paginas int,
@@ -37,7 +38,7 @@ primary key (id_autor)
 
 create table autor_titulo(
 id int,
-isbn int
+isbn bigint
 );
 
 alter table autor_titulo add constraint fk_autor_titulo_id foreign key(id) references autor(id_autor);
@@ -51,7 +52,7 @@ primary key (id_categoria)
 
 create table titulo_categoria(
 id_categoria int,
-isbn int,
+isbn bigint,
 constraint fk_titulo_categoria_categoria foreign key(id_categoria) references categoria(id_categoria),
 constraint fk_titulo_categoria_titulo foreign key(isbn) references titulo(isbn)
 );
@@ -62,13 +63,12 @@ desc_idioma varchar(45),
 primary key(id_idioma)
 );
 
-create table titulo_idioma(
+create table libro_idioma(
 id_idioma int,
-isbn int
+nro_serie int
 );
 
-alter table titulo_idioma add constraint fk_titulo_idioma_idioma foreign key(id_idioma) references idioma(id_idioma);
-alter table titulo_idioma add constraint fk_titulo_idioma_titulo foreign key(isbn) references titulo(isbn);
+alter table libro_idioma add constraint fk_libro_idioma_idioma foreign key(id_idioma) references idioma(id_idioma);
 
 create table estado(
 id_estado int primary key,
@@ -78,11 +78,13 @@ desc_estado varchar(20)
 create table libro(
 nro_serie int auto_increment,
 id_estado int,
-isbn int,
+isbn bigint,
 primary key (nro_serie),
 constraint fk_libro_estado foreign key (nro_serie) references estado(id_estado),
 constraint fk_libro_titulo foreign key (isbn) references titulo(isbn)
 );
+
+alter table libro_idioma add constraint fk_libro_idioma_libro foreign key(nro_serie) references libro(nro_serie);
 
 create table metodo_pago(
 id_metodo_pago int auto_increment,
@@ -115,11 +117,16 @@ nro_serie int,
 rut_distribuidor varchar(11),
 folio int,
 primary key(id_compra),
-constraint fk_compra_libro foreign key(nro_serie) references libro(nro_serie),
 constraint fk_compra_distribuidor foreign key(rut_distribuidor) references distribuidor(rut),
 constraint fk_compra_factura foreign key(folio) references factura(folio)
 );
 
+create table compra_libro(
+id_compra int,
+nro_serie int,
+constraint fk_compra_libro_compra foreign key(id_compra) references compra(id_compra),
+constraint fk_compra_libro_libro foreign key(nro_serie) references libro(nro_serie)
+);
 
 create table boleta(
 folio int auto_increment,
@@ -230,3 +237,8 @@ id_arriendo int,
 primary key (id_detalle_arriendo),
 constraint fk_detalle_arriendo_arriendo foreign key(id_arriendo) references arriendo(id_arriendo)
 );
+
+
+insert into publicacion(desc_publicacion) values('Libro');
+insert into editorial(desc_editorial) values('Salesiana');
+insert into titulo values(9789750720475,'1967-06-01',10000,400,1,1);
