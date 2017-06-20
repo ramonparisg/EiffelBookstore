@@ -279,9 +279,22 @@
         <servlet-name>FacturaServlet</servlet-name>
         <url-pattern>/Factura/buscar</url-pattern>
     </servlet-mapping>
+    <!--*****************************COMPRA*************************** -->
     <servlet-mapping>
         <servlet-name>CompraServlet</servlet-name>
-        <url-pattern>/Compra</url-pattern>
+        <url-pattern>/Compra/insertar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CompraServlet</servlet-name>
+        <url-pattern>/Compra/agregarLibro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CompraServlet</servlet-name>
+        <url-pattern>/Compra/eliminarLibro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CompraServlet</servlet-name>
+        <url-pattern>/Compra/mostrarLibro</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

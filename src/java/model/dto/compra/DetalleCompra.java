@@ -15,18 +15,18 @@ public class DetalleCompra {
     private String idioma;
     private int idIdioma;
     private int cantidad;
-    private double precio;
+    private int precio;
 
-    public DetalleCompra() {
-    }
-
-    public DetalleCompra(String isbn, String titulo, String idioma, int idIdioma, int cantidad, double precio) {
+    public DetalleCompra(String isbn, String titulo, String idioma, int idIdioma, int cantidad, int precio) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.idioma = idioma;
         this.idIdioma = idIdioma;
         this.cantidad = cantidad;
         this.precio = precio;
+    }
+
+    public DetalleCompra() {
     }
 
     public String getIsbn() {
@@ -69,13 +69,15 @@ public class DetalleCompra {
         this.cantidad = cantidad;
     }
 
-    public double getPrecio() {
+    public int getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(int precio) {
         this.precio = precio;
     }
+
+    
     
     
 }

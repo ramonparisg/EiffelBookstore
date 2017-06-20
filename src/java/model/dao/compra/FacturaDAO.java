@@ -99,5 +99,22 @@ public class FacturaDAO {
         }                
         return null;
     }
-    
+    public int currentId(){
+        int id = -1;
+        String q = "SELECT AUTO_INCREMENT\n" +
+                    "FROM information_schema.TABLES\n" +
+                    "WHERE TABLE_SCHEMA = \"biblioteca\"\n" +
+                    "AND TABLE_NAME = \"factura\";";
+        ResultSet rs = c.leerDatos(q);
+        try {
+            while (rs.next()){
+                id = rs.getInt(1);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FacturaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return (id-1);
+    }
 }

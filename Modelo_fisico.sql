@@ -71,8 +71,9 @@ nro_serie int
 alter table libro_idioma add constraint fk_libro_idioma_idioma foreign key(id_idioma) references idioma(id_idioma);
 
 create table estado(
-id_estado int primary key,
-desc_estado varchar(20)
+id_estado int auto_increment,
+desc_estado varchar(20),
+primary key(id_estado)
 );
 
 create table libro(
@@ -113,7 +114,6 @@ anyos_venta int
 
 create table compra(
 id_compra int auto_increment,
-nro_serie int,
 rut_distribuidor varchar(11),
 folio int,
 primary key(id_compra),
@@ -241,4 +241,6 @@ constraint fk_detalle_arriendo_arriendo foreign key(id_arriendo) references arri
 
 insert into publicacion(desc_publicacion) values('Libro');
 insert into editorial(desc_editorial) values('Salesiana');
-insert into titulo values(9789750720475,'1967-06-01',10000,400,1,1);
+insert into titulo values(9789750720475,'Relato de un naufrago','1967-06-01',10000,400,1,1);
+insert into titulo values(9789631420494,'Cien anos de soledad','1967-06-01',121212,600,1,1);
+insert into titulo values(9789631420494,'Cien anos de soledad','1967-06-01',121212,600,1,1);
