@@ -121,7 +121,7 @@ constraint fk_compra_distribuidor foreign key(rut_distribuidor) references distr
 constraint fk_compra_factura foreign key(folio) references factura(folio)
 );
 
-create table compra_libro(
+create table libro_compra(
 id_compra int,
 nro_serie int,
 constraint fk_compra_libro_compra foreign key(id_compra) references compra(id_compra),
@@ -238,9 +238,12 @@ primary key (id_detalle_arriendo),
 constraint fk_detalle_arriendo_arriendo foreign key(id_arriendo) references arriendo(id_arriendo)
 );
 
-
+insert into idioma(desc_idioma) values('Espanol');
+insert into estado(desc_estado) values('Disponible');
+insert into metodo_pago(desc_metodo_pago) values('Efectivo'):
+insert into metodo_pago(desc_metodo_pago) values('Tarjeta de Credito');
 insert into publicacion(desc_publicacion) values('Libro');
 insert into editorial(desc_editorial) values('Salesiana');
 insert into titulo values(9789750720475,'Relato de un naufrago','1967-06-01',10000,400,1,1);
 insert into titulo values(9789631420494,'Cien anos de soledad','1967-06-01',121212,600,1,1);
-insert into titulo values(9789631420494,'Cien anos de soledad','1967-06-01',121212,600,1,1);
+insert into distribuidor values(254126837,'Ramon Paris','Sta Elena 898','1234659',1995);

@@ -83,4 +83,12 @@ public class LibroDAO {
         }
         return null;
     }
+    
+    public int insertarMuchosAMuchos(String tabla, int id,int nroSerie){
+        int res =0;
+        String q ="insert into libro_"+tabla+" values("+id+","+nroSerie+")";
+        res = c.ejecutarSQL(q);
+        return res;
+    }
+   
 }

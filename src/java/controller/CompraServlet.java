@@ -15,10 +15,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.dao.LibroDAO;
+import model.dao.compra.CompraDAO;
 import model.dao.compra.FacturaDAO;
 import model.dto.FacturaBoleta;
+import model.dto.Libro;
+import model.dto.compra.Compra;
 import model.dto.compra.DetalleCompra;
 import util.Ayudante;
+import util.CurrentID;
 
 /**
  *
@@ -39,12 +44,13 @@ public class CompraServlet extends HttpServlet {
             throws ServletException, IOException {
         String ruta = request.getRequestURI();
         String accion = Ayudante.getAccion(ruta);
+        CurrentID id = new CurrentID();
         
         switch(accion){
             case "mostrarLibro":                
                 try (PrintWriter out = response.getWriter()) {
                     out.println("<table class=\"table\">\n" +
-"              	       	<thead>\n" +
+"              	       	<thead>\n" + id.currentId("factura") +
 "	       		<th>Cantidad</th>\n" +
 "	       		<th>Titulo</th>\n" +
 "	       		<th>Idioma</th>\n" +
@@ -81,7 +87,8 @@ public class CompraServlet extends HttpServlet {
                 CompraServlet.listaDC.remove(i);
                 response.sendRedirect(request.getContextPath()+"/Compra/mostrarLibro");
                 break;
-            case "insertar":                                
+            case "insertar":                      
+                
                 DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
                 Calendar cal = Calendar.getInstance();
                 String fecha = sdf.format(cal.getTime());
@@ -95,13 +102,21 @@ public class CompraServlet extends HttpServlet {
                 for(DetalleCompra d : CompraServlet.listaDC){
                     subtotal = subtotal + d.getPrecio() * d.getCantidad();
                 }
-                FacturaDAO dao = new FacturaDAO();
-                dao.insertar(new FacturaBoleta(0,fecha,subtotal, (int) (subtotal*0.19),"",idMetodo));
+                FacturaDAO factura = new FacturaDAO();
+                factura.insertar(new FacturaBoleta(0,fecha,subtotal, (int) (subtotal*0.19),"",idMetodo));
+                
+                CompraDAO compra = new CompraDAO();
+                compra.insertar(new Compra(0,0,distribuidor,id.currentId("factura")));
                 
                 
                 //Inserting libros
+                LibroDAO libro = new LibroDAO();
                 for(DetalleCompra d : CompraServlet.listaDC){
-                    
+                    for (int k =0;k<d.getCantidad();k++){
+                        libro.insertar(new Libro(0,1,d.getIsbn()));
+                        libro.insertarMuchosAMuchos("compra", id.currentId("compra"), id.currentId("libro"));
+                        libro.insertarMuchosAMuchos("idioma", d.getIdIdioma(), id.currentId("libro"));
+                    }
                 }
                 
                 break;

@@ -51,6 +51,7 @@ public class Conexion {
         int res=0;        
         try {
             res = stm.executeUpdate(q);
+            desconecta();
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, "Error: "+ ex + " En sentencia: "+ q);
         }        
