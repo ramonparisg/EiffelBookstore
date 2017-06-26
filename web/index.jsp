@@ -42,6 +42,14 @@
                 <li><a href="Factura/listar">Factura</a></li>
             </ul>
         </ul>
+        ´<h4>Vender</h4>
+        <ul>
+            <li><a href="Libro/Transacciones/Vender/index.jsp">Vender</a></li>
+            <ul>                
+                <li><a href="Cliente/listar">Cliente</a></li>
+                <li><a href="Vendedor/listar">Vendedor</a></li>                
+            </ul>
+        </ul>
         
         
     </body>

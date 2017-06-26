@@ -26,14 +26,14 @@ public class CompraDAO {
     
     public int insertar(Compra com){
         int res=0;
-        String q = "insert into compra(nro_serie,rut_distribuidor,folio) values("+com.getNroSerie()+","+com.getRutDistribuidor()+","+com.getFolio()+")";
+        String q = "insert into compra(rut_distribuidor,folio) values("+com.getRutDistribuidor()+","+com.getFolio()+")";
         res = c.ejecutarSQL(q);
         return res;
     }
     
     public int modificar(Compra com){
         int res=0;
-        String q = "update compra set nro_serie="+com.getNroSerie()+",rut_distribuidor="+com.getRutDistribuidor()+",folio="+com.getFolio() +
+        String q = "update compra set rut_distribuidor="+com.getRutDistribuidor()+",folio="+com.getFolio() +
                 " where id_compra="+com.getId();
         res = c.ejecutarSQL(q);
         return res;
@@ -53,10 +53,9 @@ public class CompraDAO {
         try {
             while(rs.next()){
                 com = new Compra();
-                com.setId(rs.getInt(1));
-                com.setNroSerie(rs.getInt(2));
-                com.setRutDistribuidor(rs.getInt(3));
-                com.setFolio(rs.getInt(4));                
+                com.setId(rs.getInt(1));                
+                com.setRutDistribuidor(rs.getInt(2));
+                com.setFolio(rs.getInt(3));                
             }
         } catch (SQLException ex) {
             Logger.getLogger(CompraDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -72,15 +71,14 @@ public class CompraDAO {
         try {
             while(rs.next()){
                 com = new Compra();
-                com.setId(rs.getInt(1));
-                com.setNroSerie(rs.getInt(2));
-                com.setRutDistribuidor(rs.getInt(3));
-                com.setFolio(rs.getInt(4));  
+                com.setId(rs.getInt(1));                
+                com.setRutDistribuidor(rs.getInt(2));
+                com.setFolio(rs.getInt(3));  
                 lista.add(com);
             }
             return lista;
         } catch (SQLException ex) {
-            Logger.getLogger(CompraDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, "Error: "+ex);
         }            
         return null;
     }

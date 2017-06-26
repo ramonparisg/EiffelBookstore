@@ -49,6 +49,10 @@
         <servlet-name>CompraServlet</servlet-name>
         <servlet-class>controller.CompraServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ClienteServlet</servlet-name>
+        <servlet-class>controller.ClienteServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TituloServlet</servlet-name>
         <url-pattern>/Titulo/listar</url-pattern>
@@ -286,6 +290,14 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CompraServlet</servlet-name>
+        <url-pattern>/Compra/listar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CompraServlet</servlet-name>
+        <url-pattern>/Compra/recibo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CompraServlet</servlet-name>
         <url-pattern>/Compra/agregarLibro</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -295,6 +307,27 @@
     <servlet-mapping>
         <servlet-name>CompraServlet</servlet-name>
         <url-pattern>/Compra/mostrarLibro</url-pattern>
+    </servlet-mapping>
+    <!--***************************** CLIENTE *************************** -->
+    <servlet-mapping>
+        <servlet-name>ClienteServlet</servlet-name>
+        <url-pattern>/Cliente/listar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClienteServlet</servlet-name>
+        <url-pattern>/Cliente/insertar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClienteServlet</servlet-name>
+        <url-pattern>/Cliente/eliminar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClienteServlet</servlet-name>
+        <url-pattern>/Cliente/modificar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClienteServlet</servlet-name>
+        <url-pattern>/Cliente/buscar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

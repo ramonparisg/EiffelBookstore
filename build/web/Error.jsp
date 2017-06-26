@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Error <%=request.getAttribute("id") %></h1>
+        <h1>Error <%=request.getAttribute("error") %></h1>
     </body>
 </html>

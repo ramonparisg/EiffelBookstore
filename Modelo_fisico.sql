@@ -81,7 +81,7 @@ nro_serie int auto_increment,
 id_estado int,
 isbn bigint,
 primary key (nro_serie),
-constraint fk_libro_estado foreign key (nro_serie) references estado(id_estado),
+constraint fk_libro_estado foreign key (id_estado) references estado(id_estado),
 constraint fk_libro_titulo foreign key (isbn) references titulo(isbn)
 );
 
@@ -240,10 +240,26 @@ constraint fk_detalle_arriendo_arriendo foreign key(id_arriendo) references arri
 
 insert into idioma(desc_idioma) values('Espanol');
 insert into estado(desc_estado) values('Disponible');
-insert into metodo_pago(desc_metodo_pago) values('Efectivo'):
+insert into metodo_pago(desc_metodo_pago) values('Efectivo');
 insert into metodo_pago(desc_metodo_pago) values('Tarjeta de Credito');
 insert into publicacion(desc_publicacion) values('Libro');
 insert into editorial(desc_editorial) values('Salesiana');
 insert into titulo values(9789750720475,'Relato de un naufrago','1967-06-01',10000,400,1,1);
 insert into titulo values(9789631420494,'Cien anos de soledad','1967-06-01',121212,600,1,1);
 insert into distribuidor values(254126837,'Ramon Paris','Sta Elena 898','1234659',1995);
+
+select 
+t.isbn,t.nombre,
+i.desc_idioma,i.id_idioma,
+count(l.nro_serie),t.precio_referencia
+from libro_compra lc, libro l, titulo t, libro_idioma li, idioma i
+where lc.id_compra = 1
+and lc.nro_serie = l.nro_serie
+and l.isbn = t.isbn
+and l.nro_serie = li.nro_serie
+and li.id_idioma = i.id_idioma
+group by l.isbn;
+
+
+
+

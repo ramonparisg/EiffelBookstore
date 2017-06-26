@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Error
-    Created on : 05-06-2017, 17:11:20
+    Document   : index.jsp
+    Created on : 17-06-2017, 20:03:36
     Author     : Ramon Paris
 --%>
 
@@ -12,6 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Error <%=request.getAttribute("error") %></h1>
+       <h1>Acciones</h1>
+       
+       <a href="vender.jsp">Vender</a> <br/>
+       <a href="<%=request.getContextPath()%>/Venta/listar">Listar ventas</a>
     </body>
 </html>

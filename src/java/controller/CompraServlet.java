@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.dao.LibroDAO;
 import model.dao.compra.CompraDAO;
+import model.dao.compra.DetalleCompraDAO;
 import model.dao.compra.FacturaDAO;
 import model.dto.FacturaBoleta;
 import model.dto.Libro;
@@ -43,14 +44,14 @@ public class CompraServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String ruta = request.getRequestURI();
+        PrintWriter out = response.getWriter();
         String accion = Ayudante.getAccion(ruta);
         CurrentID id = new CurrentID();
-        
+        CompraDAO dao = new CompraDAO();
         switch(accion){
-            case "mostrarLibro":                
-                try (PrintWriter out = response.getWriter()) {
+            case "mostrarLibro":                                
                     out.println("<table class=\"table\">\n" +
-"              	       	<thead>\n" + id.currentId("factura") +
+"              	       	<thead>\n" +
 "	       		<th>Cantidad</th>\n" +
 "	       		<th>Titulo</th>\n" +
 "	       		<th>Idioma</th>\n" +
@@ -67,8 +68,7 @@ public class CompraServlet extends HttpServlet {
                         out.println("<td><span class='btn btn-danger eliLibro' onclick='eliminarLibro("+i+","+d.getCantidad()+","+d.getPrecio()+")'><spam class=\"glyphicon glyphicon-remove\"></spam></span></td>");
                         i++;
                         out.println("</tbody>");                                                
-                    }                    
-                }
+                    }                                    
                 break;
             case "agregarLibro":
                 String isbn = request.getParameter("isbn");
@@ -83,8 +83,8 @@ public class CompraServlet extends HttpServlet {
 
                 break;
             case "eliminarLibro":
-                int i = Integer.parseInt(request.getParameter("i"));
-                CompraServlet.listaDC.remove(i);
+                int index = Integer.parseInt(request.getParameter("i"));
+                CompraServlet.listaDC.remove(index);
                 response.sendRedirect(request.getContextPath()+"/Compra/mostrarLibro");
                 break;
             case "insertar":                      
@@ -103,22 +103,82 @@ public class CompraServlet extends HttpServlet {
                     subtotal = subtotal + d.getPrecio() * d.getCantidad();
                 }
                 FacturaDAO factura = new FacturaDAO();
-                factura.insertar(new FacturaBoleta(0,fecha,subtotal, (int) (subtotal*0.19),"",idMetodo));
+                
+                if (factura.insertar(new FacturaBoleta(0,fecha,subtotal, (int) (subtotal*0.19),"",idMetodo)) > 0){
+                    out.println("Factura insertada");
+                }else{
+                    request.setAttribute("error", "Error al insertar factura");
+                    request.getRequestDispatcher(request.getContextPath()+"/Error.jsp").forward(request, response);
+                }
                 
                 CompraDAO compra = new CompraDAO();
-                compra.insertar(new Compra(0,0,distribuidor,id.currentId("factura")));
+                if (compra.insertar(new Compra(0,0,distribuidor,id.currentId("factura"))) > 0){
+                    
+                }else{
+                    request.setAttribute("error", "Error al insertar compra");
+                    request.getRequestDispatcher(request.getContextPath()+"/Error.jsp").forward(request, response);
+                }
                 
                 
                 //Inserting libros
                 LibroDAO libro = new LibroDAO();
-                for(DetalleCompra d : CompraServlet.listaDC){
-                    for (int k =0;k<d.getCantidad();k++){
-                        libro.insertar(new Libro(0,1,d.getIsbn()));
-                        libro.insertarMuchosAMuchos("compra", id.currentId("compra"), id.currentId("libro"));
-                        libro.insertarMuchosAMuchos("idioma", d.getIdIdioma(), id.currentId("libro"));
+                Libro l;
+                for(DetalleCompra d : CompraServlet.listaDC){                    
+                    for (int k =1;k<=d.getCantidad();k++){
+                        l = new Libro();
+                        l.setIsbn(d.getIsbn());
+                        l.setIdEstado(1);
+                        l.setNroSerie(0);
+                        out.println("Item: "+k );           
+                        //Insertar libro
+                        if (libro.insertar(l) > 0){
+                            
+                        }else{
+                            request.setAttribute("error", "Error al insertar Libro");
+                            request.getRequestDispatcher(request.getContextPath()+"/Error.jsp").forward(request, response);
+                        }
+                        
+                        //Insertar libro-compra
+                        if (libro.insertarMuchosAMuchos("compra", id.currentId("compra"), id.currentId("libro")) > 0){
+                            
+                        }else{
+                            request.setAttribute("error", "Error al insertar libro_compra");
+                            request.getRequestDispatcher(request.getContextPath()+"/Error.jsp").forward(request, response);
+                        }
+                        
+                        //Insertar libro-idioma
+                        if (libro.insertarMuchosAMuchos("idioma", d.getIdIdioma(), id.currentId("libro")) > 0){
+                        
+                        }else{
+                            request.setAttribute("error", "Error al insertar libro_idioma");
+                            request.getRequestDispatcher(request.getContextPath()+"/Error.jsp").forward(request, response);
+                        }                       
                     }
                 }
                 
+                //Éxito
+//                response.sendRedirect(request.getContextPath()+"/Compra/exito");
+                response.sendRedirect(request.getContextPath()+"/Libro/Transacciones/Comprar/exito.jsp");
+                break;
+            case "listar":                
+                ArrayList<Compra> lista = dao.listar();
+                request.setAttribute("lista", lista);
+                request.getRequestDispatcher("../Libro/Transacciones/Comprar/lista.jsp").forward(request, response);
+                break;
+            case "recibo":
+                int idx = Integer.parseInt(request.getParameter("id"));
+                FacturaDAO factDAO = new FacturaDAO();
+                FacturaBoleta f = factDAO.buscar(idx);
+                int price=0;
+                DetalleCompraDAO dcDAO = new DetalleCompraDAO();                
+                ArrayList<DetalleCompra> detalles = dcDAO.listar(idx);
+                for (DetalleCompra d : detalles){
+                    price = price + (d.getPrecio()*d.getCantidad());
+                }
+                request.setAttribute("factura", f);
+                request.setAttribute("lista", detalles);
+                request.setAttribute("subtotal", price);
+                request.getRequestDispatcher("../Libro/Transacciones/Comprar/recibo.jsp").forward(request, response);
                 break;
         }
     }

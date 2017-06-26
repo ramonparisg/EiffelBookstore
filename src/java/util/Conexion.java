@@ -50,8 +50,7 @@ public class Conexion {
     public int ejecutarSQL(String q){
         int res=0;        
         try {
-            res = stm.executeUpdate(q);
-            desconecta();
+            res = stm.executeUpdate(q);            
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, "Error: "+ ex + " En sentencia: "+ q);
         }        
