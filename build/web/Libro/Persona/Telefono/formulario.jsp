@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index.jsp
-    Created on : 17-06-2017, 20:03:36
+    Document   : formulario
+    Created on : 26-06-2017, 19:15:38
     Author     : Ramon Paris
 --%>
 
@@ -12,9 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-       <h1>Acciones</h1>
-       
-       <a href="<%=request.getContextPath()%>/Vender/listarDisponibles">Vender</a> <br/>
-       <a href="<%=request.getContextPath()%>/Venta/listar">Listar ventas</a>
+        <h1>Hello World!</h1>
     </body>
 </html>

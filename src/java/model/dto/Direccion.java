@@ -16,6 +16,10 @@ public class Direccion {
     private int rut;
 
     public Direccion() {
+        id=0;
+        nombre="";
+        nro=0;
+        rut=0;
     }
 
     public Direccion(int id, String nombre, int nro, int rut) {

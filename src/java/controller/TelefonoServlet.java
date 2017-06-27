@@ -7,20 +7,16 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.dao.PersonaDAO;
-import model.dto.Persona;
-import util.Ayudante;
 
 /**
  *
  * @author Ramon Paris
  */
-public class ClienteServlet extends HttpServlet {
+public class TelefonoServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,20 +29,18 @@ public class ClienteServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String ruta = request.getRequestURI();
-        String accion = Ayudante.getAccion(ruta);
-        PersonaDAO dao = new PersonaDAO();
-        Persona c;
-        ArrayList<Persona> lista = new ArrayList<Persona>();
-        switch(accion){
-            case "listar":
-                lista = dao.listar("cliente");
-                request.setAttribute("lista", lista);
-                request.getRequestDispatcher("../Libro/Persona/index.jsp").forward(request, response);
-                break;
-            case "insertar":
-                
-                break;
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet TelefonoServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet TelefonoServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

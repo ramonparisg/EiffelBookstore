@@ -37,7 +37,7 @@ public class DetalleCompraDAO {
                     "and l.isbn = t.isbn\n" +
                     "and l.nro_serie = li.nro_serie\n" +
                     "and li.id_idioma = i.id_idioma\n" +
-                    "group by l.isbn;";
+                    "group by l.isbn,i.id_idioma;";
         ResultSet rs=c.leerDatos(q);
         try {
             while (rs.next()){

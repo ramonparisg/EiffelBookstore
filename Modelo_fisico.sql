@@ -185,7 +185,7 @@ constraint fk_telefono_cliente_cliente foreign key(rut) references cliente(rut)
 );
 
 create table correo_cliente(
-correo int primary key,
+correo varchar(45) primary key,
 rut int,
 constraint fk_correo_cliente_cliente foreign key(rut) references cliente(rut)
 );
@@ -260,6 +260,44 @@ and l.nro_serie = li.nro_serie
 and li.id_idioma = i.id_idioma
 group by l.isbn;
 
+select
+t.isbn,t.nombre,
+i.desc_idioma,i.id_idioma,
+count(l.nro_serie),t.precio_referencia
+from libro l, titulo t, libro_idioma li, idioma i
+where l.id_estado=1
+and l.isbn = t.isbn
+and l.nro_serie = li.nro_serie
+and li.id_idioma = i.id_idioma
+and t.nombre like '%%'
+group by l.isbn;
 
+select
+t.isbn,t.nombre,
+i.desc_idioma,i.id_idioma,
+count(l.nro_serie),t.precio_referencia
+from libro l, titulo t, libro_idioma li, idioma i
+where l.id_estado=1
+and l.isbn = t.isbn
+and l.nro_serie = li.nro_serie
+and li.id_idioma = i.id_idioma
+group by l.isbn,i.id_idioma;
 
+select
+l.nro_serie,l.isbn
+from libro l, titulo t, libro_idioma li, idioma i
+where l.id_estado=1
+and l.isbn = t.isbn
+and t.isbn=9789631420494
+and l.nro_serie = li.nro_serie
+and li.id_idioma = i.id_idioma
+and i.id_idioma=3;
 
+select
+t.isbn,t.nombre,t.precio_referencia,
+i.desc_idioma,i.id_idioma
+from libro l, titulo t, libro_idioma li, idioma i
+where l.nro_serie=1
+and l.isbn = t.isbn
+and l.nro_serie = li.nro_serie
+and li.id_idioma = i.id_idioma;

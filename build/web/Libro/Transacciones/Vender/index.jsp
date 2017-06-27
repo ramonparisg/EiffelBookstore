@@ -14,7 +14,7 @@
     <body>
        <h1>Acciones</h1>
        
-       <a href="vender.jsp">Vender</a> <br/>
+       <a href="<%=request.getContextPath()%>/Vender/listarDisponibles">Vender</a> <br/>
        <a href="<%=request.getContextPath()%>/Venta/listar">Listar ventas</a>
     </body>
 </html>

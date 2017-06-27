@@ -14,6 +14,8 @@ public class Correo {
     private int rut;
 
     public Correo() {
+        correo="";
+        rut=0;
     }
 
     public Correo(String correo, int rut) {

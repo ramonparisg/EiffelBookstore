@@ -14,6 +14,8 @@ public class Telefono {
     private int rut;
 
     public Telefono() {
+        nro =0;
+        rut =0;
     }
 
     public Telefono(int nro, int rut) {

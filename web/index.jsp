@@ -46,8 +46,8 @@
         <ul>
             <li><a href="Libro/Transacciones/Vender/index.jsp">Vender</a></li>
             <ul>                
-                <li><a href="Cliente/listar">Cliente</a></li>
-                <li><a href="Vendedor/listar">Vendedor</a></li>                
+                <li><a href="Libro/Persona/index.jsp?tabla=Cliente">Cliente</a></li>
+                <li><a href="Libro/Persona/index.jsp?tabla=Trabajador">Trabajador</a></li>                
             </ul>
         </ul>
         

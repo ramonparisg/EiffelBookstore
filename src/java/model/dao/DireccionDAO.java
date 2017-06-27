@@ -28,7 +28,7 @@ public class DireccionDAO {
         int res=0;
         String q ="insert into direccion_"+tabla+"(nombre_calle,nro_calle,rut) values('"
                 + d.getNombre()+"',"
-                + d.getNro()+""
+                + d.getNro()+","
                 + d.getRut()+")";
         res = c.ejecutarSQL(q);
         return res;
@@ -37,10 +37,9 @@ public class DireccionDAO {
     public int modificar(Direccion d, String tabla){
         int res=0;
         String q ="update direccion_"+tabla+""
-                + "nombre_calle='"+d.getNombre()
-                + "',nro_calle="+d.getNro()
-                + ",rut="+d.getRut()
-                + " where id_direccion="+d.getId();
+                + " set nombre_calle='"+d.getNombre()
+                + "',nro_calle="+d.getNro()                
+                + " where rut="+d.getRut();
         res = c.ejecutarSQL(q);
         return res;
     }
@@ -52,9 +51,9 @@ public class DireccionDAO {
         return res;
     }
     
-    public Direccion buscar(int id, String tabla){
+    public Direccion buscar(int rut, String tabla){
        Direccion d = null;
-       String q ="Select * from direccion_"+tabla+" where id_direccion="+id;
+       String q ="Select * from direccion_"+tabla+" where rut="+rut;
        ResultSet rs = c.leerDatos(q);
         try {
             while(rs.next()){

@@ -45,7 +45,7 @@ public class LibroDAO {
         return res;
     }
     
-    public Libro buscar(String id){
+    public Libro buscar(int id){
         Libro l=null;
         ResultSet rs;
         String q = "Select * from libro where nro_serie="+id;

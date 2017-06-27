@@ -17,6 +17,11 @@ public class Persona {
     private String fechaNac;
 
     public Persona() {
+        rut = 0;
+        nombre ="";
+        apePat="";
+        apeMat="";
+        fechaNac="";
     }
 
     public Persona(int rut, String nombre, String apePat, String apeMat, String fechaNac) {

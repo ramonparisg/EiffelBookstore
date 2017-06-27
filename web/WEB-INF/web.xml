@@ -50,8 +50,16 @@
         <servlet-class>controller.CompraServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ClienteServlet</servlet-name>
-        <servlet-class>controller.ClienteServlet</servlet-class>
+        <servlet-name>PersonaServlet</servlet-name>
+        <servlet-class>controller.PersonaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TelefonoServlet</servlet-name>
+        <servlet-class>controller.TelefonoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VenderServlet</servlet-name>
+        <servlet-class>controller.VenderServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>TituloServlet</servlet-name>
@@ -310,25 +318,80 @@
     </servlet-mapping>
     <!--***************************** CLIENTE *************************** -->
     <servlet-mapping>
-        <servlet-name>ClienteServlet</servlet-name>
-        <url-pattern>/Cliente/listar</url-pattern>
+        <servlet-name>PersonaServlet</servlet-name>
+        <url-pattern>/Persona/listar</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ClienteServlet</servlet-name>
-        <url-pattern>/Cliente/insertar</url-pattern>
+        <servlet-name>PersonaServlet</servlet-name>
+        <url-pattern>/Persona/insertar</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ClienteServlet</servlet-name>
-        <url-pattern>/Cliente/eliminar</url-pattern>
+        <servlet-name>PersonaServlet</servlet-name>
+        <url-pattern>/Persona/eliminar</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ClienteServlet</servlet-name>
-        <url-pattern>/Cliente/modificar</url-pattern>
+        <servlet-name>PersonaServlet</servlet-name>
+        <url-pattern>/Persona/modificar</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ClienteServlet</servlet-name>
-        <url-pattern>/Cliente/buscar</url-pattern>
+        <servlet-name>PersonaServlet</servlet-name>
+        <url-pattern>/Persona/buscar</url-pattern>
     </servlet-mapping>
+    <!--***************************** TELEFONO *************************** -->
+    <servlet-mapping>
+        <servlet-name>TelefonoServlet</servlet-name>
+        <url-pattern>/Telefono/listar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TelefonoServlet</servlet-name>
+        <url-pattern>/Telefono/insertar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TelefonoServlet</servlet-name>
+        <url-pattern>/Telefono/eliminar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TelefonoServlet</servlet-name>
+        <url-pattern>/Telefono/modificar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TelefonoServlet</servlet-name>
+        <url-pattern>/Telefono/buscar</url-pattern>
+    </servlet-mapping>
+    <!--***************************** VENDER *************************** -->
+    <servlet-mapping>
+        <servlet-name>VenderServlet</servlet-name>
+        <url-pattern>/Vender</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VenderServlet</servlet-name>
+        <url-pattern>/Vender/insertar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VenderServlet</servlet-name>
+        <url-pattern>/Vender/listar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VenderServlet</servlet-name>
+        <url-pattern>/Vender/recibo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VenderServlet</servlet-name>
+        <url-pattern>/Vender/agregarLibro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VenderServlet</servlet-name>
+        <url-pattern>/Vender/eliminarLibro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VenderServlet</servlet-name>
+        <url-pattern>/Vender/mostrarLibro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VenderServlet</servlet-name>
+        <url-pattern>/Vender/listarDisponibles</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30
