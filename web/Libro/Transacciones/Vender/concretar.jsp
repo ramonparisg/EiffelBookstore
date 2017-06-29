@@ -4,6 +4,12 @@
     Author     : Ramon Paris
 --%>
 
+<%@page import="model.dto.DetalleTransaccion"%>
+<%@page import="model.dao.DetalleTransaccionDAO"%>
+<%@page import="controller.VenderServlet"%>
+<%@page import="model.dto.Libro"%>
+<%@page import="model.dto.Persona"%>
+<%@page import="model.dao.PersonaDAO"%>
 <%@page import="model.dto.compra.Distribuidor"%>
 <%@page import="model.dao.compra.DistribuidorDAO"%>
 <%@page import="java.util.Calendar"%>
@@ -33,26 +39,66 @@
             request.setAttribute("fecha",sdf.format(cal.getTime()));
             
         %>
-        <h1>Hacer compra <span class="pull-right"><%=sdf.format(cal.getTime())%></span></h1>
+        <h1>Hacer Venta <span class="pull-right"><%=sdf.format(cal.getTime())%></span></h1>
         
-           <form method="post" action="<%=request.getContextPath()%>/Compra/insertar">
-               <label>Distribuidor</label>
-           <select name="distribuidor" class="form-control" id="distribuidor">    
+           <form method="post" action="<%=request.getContextPath()%>/Vender/insertar">
+               <label>Cliente</label>
+           <select name="cliente" class="form-control" id="distribuidor">    
                         <option></option>
                         <%  
                             
-                            DistribuidorDAO distribuidor = new DistribuidorDAO();
-                            ArrayList<Distribuidor> listaDistribuidor = distribuidor.listar();
+                            PersonaDAO cliente = new PersonaDAO();
+                            ArrayList<Persona> listaCliente = cliente.listar("cliente");
                             
                             
-                            for(Distribuidor d : listaDistribuidor){ 
+                            for(Persona c : listaCliente){ 
                         %>
-                        <option value="<%=d.getRut() %>" name="distribuidor" required><%=d.getNombre() %></option>
+                        <option value="<%=c.getRut() %>" name="cliente" required><%=c.getNombre() + " " + c.getApePat() + " " + c.getApeMat()  %></option>
+                        
+                        
+                        <% } %>    
+                    </select> 
+                <label>Trabajador</label>
+           <select name="trabajador" class="form-control" id="distribuidor">    
+                        <option></option>
+                        <%  
+                            
+                            PersonaDAO trabajador = new PersonaDAO();
+                            ArrayList<Persona> listaTrabajador = cliente.listar("trabajador");
+                            
+                            
+                            for(Persona t : listaTrabajador){ 
+                        %>
+                        <option value="<%=t.getRut() %>" name="trabajador" required><%=t.getNombre() + " " + t.getApePat() + " " + t.getApeMat()  %></option>
                         
                         
                         <% } %>    
                     </select>  
-
+            <table class="table">
+                <thead>
+                    <th>Nro Serie</th>
+                    <th>Titulo</th>
+                    <th>Idioma</th>
+                    <th>Precio</th>  
+                </thead>
+                 <%  DetalleTransaccionDAO detalleDAO = new DetalleTransaccionDAO();
+                     int acum=0;
+                     DetalleTransaccion dt = new DetalleTransaccion();
+                     for (Libro l : VenderServlet.Shopping){%> 
+                 <tbody>
+                     <%
+                          dt = detalleDAO.buscarPorNroSerie(l.getNroSerie());
+                         
+                     %>
+                    <td><%=l.getNroSerie() %></td>
+                    <td><%=dt.getTitulo() %></td>
+                    <td><%=dt.getIdioma() %></td>
+                    <td><%=dt.getPrecio() %></td>
+                 </tbody>
+                 
+                 <% acum = acum + dt.getPrecio();  } 
+%>
+            </table>
             <div class="form-group">
                 <label>Metodo Pago</label> 
                 <select name="idMetodo" class="form-control">    
@@ -64,61 +110,13 @@
                     %>
                     <option value="<%=a.getId() %>" name="idMetodo" required><%=a.getDetalle() %></option>
                     <% } %>
-                </select>
+            </select>
             </div>
-            <div style="border:1px solid black;padding:15px;">               
-            <label>Titulo</label>
-            <select name="isbn" class="form-control" onchange="setPrecio()" id="titulo">    
-                        <option></option>
-                        <%  
-                            
-                            TituloDAO titulo = new TituloDAO();
-                            ArrayList<Titulo> listaTitulo = titulo.listar();
-                            ArrayList<Integer> precio = new ArrayList<Integer>();
-                            
-                            for(Titulo t : listaTitulo){ 
-                        %>
-                        <option value="<%=t.getIsbn() %>" name="isbn" data-precio="<%=t.getPrecioReferencia()%>" required><%=t.getNombre() %></option>
-                        
-                        
-                        <% } %>    
-                    </select>
-                        
-                        
-             <div class="form-group">
-                 <label>Idioma</label>
-                    <select name="idIdioma" class="form-control" id="idioma">    
-                        <option></option>
-                        <%               
-                            AuxiliarDAO auxiliar = new AuxiliarDAO();
-                            ArrayList<Auxiliar> listaIdioma = auxiliar.listar("Idioma");
-                            for(Auxiliar a : listaIdioma){ 
-                        %>
-                        <option value="<%=a.getId() %>" name="idIdioma" required><%=a.getDetalle() %> </option>
-                        <% } %>
-                    </select>
-             </div>
-            <div class="form-group">
-                    <label>Cantidad</label>
-                    <input type="number" id="cantidad" value="1" onchange="setPrecio()">
-             </div>
-            <div class="form-group">
-                <label >Precio: $<span id="precio"></span></label>                
-                     
-            </div>
-                    
-            <span class="btn btn-default" id="agregar" onclick="agregarLibro()">Agregar libro</span>
-        </div>
-         <!-- ----------------------------------------------------------------------------------------------------------- -->
-         
-                <div id="libros"></div>
-        
-        <!-- ----------------------------------------------------------------------------------------------------------- -->
-                                
+                             
        
-        Subtotal: <input type="text" disabled="true" value="0" name="subtotal" id="subtotal" onchange="asd()"><br>
-        IVA 19%: <input type="text" disabled="true" value="0" name="iva" id="iva"><br>
-        Total: <input type="text" disabled="true" value="0" name="total" id="total"><br>
+        Subtotal: <input type="text" disabled="true" value="<%=acum %>" name="subtotal" id="subtotal" onchange="asd()"><br>
+        IVA 19%: <input type="text" disabled="true" value="<%=acum*0.19 %>" name="iva" id="iva"><br>
+        Total: <input type="text" disabled="true" value="<%=acum*1.19 %>" name="total" id="total"><br>
        <div class="form-group">
         <input type="submit" class="form-control btn btn-success"/>
        </div>

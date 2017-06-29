@@ -33,7 +33,7 @@ public class LibroDAO {
     
     public int modificar(Libro l){
         int res =0;
-        String q = "update libro set id_estado="+l.getIdEstado()+",isbn="+l.getIsbn()+" where nro_serie="+l.getNroSerie();
+        String q = "update libro set id_estado="+l.getIdEstado()+" where nro_serie="+l.getNroSerie();
         res = c.ejecutarSQL(q);       
         return res;
     }

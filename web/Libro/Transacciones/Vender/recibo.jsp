@@ -4,6 +4,8 @@
     Author     : Ramon Paris
 --%>
 
+<%@page import="model.dto.venta.Venta"%>
+<%@page import="model.dto.DetalleTransaccion"%>
 <%@page import="model.dto.compra.DetalleCompra"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.dto.FacturaBoleta"%>
@@ -18,39 +20,39 @@
     <body>
         <%
             FacturaBoleta f = (FacturaBoleta) request.getAttribute("factura");
-            ArrayList<DetalleCompra> lista = (ArrayList) request.getAttribute("lista");
+            ArrayList<DetalleTransaccion> lista = (ArrayList) request.getAttribute("lista");
+            Venta v = (Venta) request.getAttribute("venta");
             int subtotal = 0;           
             
 
         %>
         <div class="" style="width:800px;margin: 100px auto;">
-        <h1 class="text-center">Recibo de Compra </h1>
+        <h1 class="text-center">Recibo de Venta </h1>
         
-        <h3 class="">Nro de Factura: <b><%=f.getFolio() %></b></h3>
+        <h3 class="">Nro de Boleta <b><%=f.getFolio() %></b></h3>
         Fecha de compra: <b><%=f.getFechaCompra() %></b>
+        
+        <p>Trabajador: <b> <%=v.getRutTrabajador() %></b> <br>
+            Cliente: <b> <%=v.getRutCliente() %></b></p>
         <table class="table table-striped">
            <thead>
-                <th>Cantidad</th>    
+                <th>Nro Serie</th>    
                 <th>Titulo</th>
                 <th>Idioma</th>
                 <th>Precio</th>                
             </thead>
             <% 
-                for (DetalleCompra dc : lista){
+                for (DetalleTransaccion d : lista){
+                    subtotal= subtotal + d.getPrecio();
             %>
             <tbody>
-                <td><%=dc.getCantidad() %></td>
-                <td><%=dc.getTitulo() %></td>
-                <td><%=dc.getIdioma() %></td>
-                <td><%=dc.getPrecio() %></td>
+                <td><%=d.getNroserie()%></td>
+                <td><%=d.getTitulo() %></td>
+                <td><%=d.getIdioma() %></td>
+                <td><%=d.getPrecio() %></td>
             </tbody>
             <% }%>
-        </table>
-        <% 
-            for (DetalleCompra d : lista){
-                subtotal = subtotal + (d.getPrecio()*d.getCantidad());
-            }
-        %>
+        </table>        
         <div class="text-right" style="font-size: 18px;">
             
         Subtotal: <b>$<%=subtotal %> </b><br>

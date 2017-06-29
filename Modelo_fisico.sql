@@ -201,41 +201,43 @@ constraint fk_direccion_cliente_cliente foreign key(rut) references cliente(rut)
 
 create table venta(
 id_venta int auto_increment,
-nro_serie int,
 folio int,
 rut_trabajador int,
 rut_cliente int,
 primary key (id_venta),
-constraint fk_venta_libro foreign key(nro_serie) references libro(nro_serie),
 constraint fk_venta_cliente foreign key(rut_cliente) references cliente(rut),
 constraint fk_venta_trabajador foreign key(rut_trabajador) references trabajador(rut),
 constraint fk_venta_boleta foreign key(folio) references boleta(folio)
 );
 
+create table libro_venta(
+id_venta int,
+nro_serie int,
+constraint fk_libro_venta_idventa foreign key(id_venta) references venta(id_venta),
+constraint fk_libro_venta_nroserie foreign key(nro_serie) references libro(nro_serie)
+);
 
 create table arriendo(
 id_arriendo int auto_increment,
-nro_serie int,
 rut_cliente int,
 rut_trabajador int,
 primary key(id_arriendo),
-constraint fk_arriendo_libro foreign key(nro_serie) references libro(nro_serie),
 constraint fk_arriendo_cliente foreign key(rut_cliente) references cliente(rut),
 constraint fk_arriendo_trabajador foreign key(rut_trabajador) references trabajador(rut)
 );
 
 
 create table detalle_arriendo(
-id_detalle_arriendo int auto_increment,
+nro_serie int,
+id_arriendo int,
 f_devolucion_estimada date,
 f_retorno_real date,
 f_arriendo date,
 costo_arriendo int,
 multa int,
-costo_total int,
-id_arriendo int,
-primary key (id_detalle_arriendo),
-constraint fk_detalle_arriendo_arriendo foreign key(id_arriendo) references arriendo(id_arriendo)
+costo_total int
+constraint fk_detalle_arriendo_arriendo foreign key(id_arriendo) references arriendo(id_arriendo),
+constraint fk_detalle_arriendo_libro foreign key(nro_serie) references libro(nro_serie)
 );
 
 insert into idioma(desc_idioma) values('Espanol');
@@ -246,7 +248,18 @@ insert into publicacion(desc_publicacion) values('Libro');
 insert into editorial(desc_editorial) values('Salesiana');
 insert into titulo values(9789750720475,'Relato de un naufrago','1967-06-01',10000,400,1,1);
 insert into titulo values(9789631420494,'Cien anos de soledad','1967-06-01',121212,600,1,1);
+	
 insert into distribuidor values(254126837,'Ramon Paris','Sta Elena 898','1234659',1995);
+
+insert into trabajador values(149871234,'Pepe','Lota','Grande','1995-06-01');
+insert into telefono_trabajador values(123456,149871234);
+insert into correo_trabajador values('pepe@lota.com',149871234);
+insert into direccion_trabajador values(0,'La ribereña',1,149871234);
+
+insert into cliente values(20202020,'Alan','Brito','Delgado','1990-02-06');
+insert into telefono_cliente values(654211,20202020);
+insert into correo_cliente values('alan@brito.com',20202020);
+insert into direccion_cliente values(0,'Villa morena',25,20202020);
 
 select 
 t.isbn,t.nombre,
@@ -301,3 +314,34 @@ where l.nro_serie=1
 and l.isbn = t.isbn
 and l.nro_serie = li.nro_serie
 and li.id_idioma = i.id_idioma;
+
+
+select 
+t.isbn,t.nombre,
+i.desc_idioma,i.id_idioma,
+count(l.nro_serie),t.precio_referencia
+from libro_compra lc, libro l, titulo t, libro_idioma li, idioma i
+where lc.id_compra = 1
+and lc.nro_serie = l.nro_serie
+and l.isbn = t.isbn
+and l.nro_serie = li.nro_serie
+and li.id_idioma = i.id_idioma
+group by l.isbn;
+
+select 
+t.isbn,t.nombre,t.precio_referencia,
+i.desc_idioma,i.id_idioma,
+count(l.nro_serie),l.nro_serie
+from libro_venta lv, libro l, titulo t, libro_idioma li, idioma i
+where lv.id_venta=2
+and lv.nro_serie=l.nro_serie
+and l.isbn=t.isbn
+and l.nro_serie=li.nro_serie
+and li.id_idioma=i.id_idioma
+group by l.nro_serie;
+
+select lv.nro_serie,l.isbn from libro_venta lv, libro l,titulo t
+where lv.id_venta=2
+and lv.nro_serie=l.nro_serie
+and l.isbn = t.isbn
+group by 1;

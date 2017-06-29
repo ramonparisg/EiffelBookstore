@@ -26,9 +26,8 @@ public class VentaDAO {
     
     public int insertar(Venta v){
         int res =0;
-        String q = "insert into venta(nro_serie,folio,rut_trabajador,rut_cliente) "
-                + "values(" +v.getNro_serie()
-                + ","+v.getBoleta()+""
+        String q = "insert into venta(folio,rut_trabajador,rut_cliente) "
+                + "values(" +v.getBoleta()+""
                 + ","+v.getRutTrabajador()+ ""
                 + ","+v.getRutCliente()+""
                 + ")";
@@ -56,16 +55,15 @@ public class VentaDAO {
     
     public Venta buscar(int id){
         Venta v = null;
-        String q = "Select * from distribuidor where rut="+id;
+        String q = "Select * from venta where id_venta="+id;
         ResultSet rs = c.leerDatos(q);
         try {
             while (rs.next()){
                 v = new Venta();
-                v.setId(rs.getInt(1));
-                v.setNro_serie(rs.getInt(2));
-                v.setBoleta(rs.getInt(3));
-                v.setRutTrabajador(rs.getInt(4));
-                v.setRutCliente(rs.getInt(5));
+                v.setId(rs.getInt(1));                
+                v.setBoleta(rs.getInt(2));
+                v.setRutTrabajador(rs.getInt(3));
+                v.setRutCliente(rs.getInt(4));
             }
         } catch (SQLException ex) {
             Logger.getLogger(VentaDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -73,19 +71,18 @@ public class VentaDAO {
         return v;
     }
     
-    public ArrayList<Venta> listar(int id){
+    public ArrayList<Venta> listar(){
         ArrayList<Venta> lista = new ArrayList<Venta>();
         Venta v = null;
-        String q = "Select * from distribuidor";
+        String q = "Select * from venta";
         ResultSet rs = c.leerDatos(q);
         try {
             while (rs.next()){
                 v = new Venta();
-                v.setId(rs.getInt(1));
-                v.setNro_serie(rs.getInt(2));
-                v.setBoleta(rs.getInt(3));
-                v.setRutTrabajador(rs.getInt(4));
-                v.setRutCliente(rs.getInt(5));
+                v.setId(rs.getInt(1));                
+                v.setBoleta(rs.getInt(2));
+                v.setRutTrabajador(rs.getInt(3));
+                v.setRutCliente(rs.getInt(4));
                 lista.add(v);
             }
             return lista;

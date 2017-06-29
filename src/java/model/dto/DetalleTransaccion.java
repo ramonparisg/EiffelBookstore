@@ -18,17 +18,19 @@ public class DetalleTransaccion {
     private int idIdioma;
     private int cantidad;
     private int precio;
+    private int nroserie;
 
-    public DetalleTransaccion(String isbn, String titulo, String idioma, int idIdioma, int cantidad, int precio) {
+    public DetalleTransaccion() {
+    }
+
+    public DetalleTransaccion(String isbn, String titulo, String idioma, int idIdioma, int cantidad, int precio, int nroserie) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.idioma = idioma;
         this.idIdioma = idIdioma;
         this.cantidad = cantidad;
         this.precio = precio;
-    }
-
-    public DetalleTransaccion() {
+        this.nroserie = nroserie;
     }
 
     public String getIsbn() {
@@ -79,6 +81,15 @@ public class DetalleTransaccion {
         this.precio = precio;
     }
 
+    public int getNroserie() {
+        return nroserie;
+    }
+
+    public void setNroserie(int nroserie) {
+        this.nroserie = nroserie;
+    }
+
+    
     
     
     

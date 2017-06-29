@@ -54,6 +54,31 @@
                 text-decoration: none;
                 cursor: pointer;
             }
+            /* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top: -300px; opacity: 0} 
+    to {top: 0; opacity: 1}
+}
+
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
         </style>
     </head>
     <body class="container">
@@ -78,7 +103,7 @@
                 
               </div>
               <div class="modal-footer">
-                  <a href="" class="btn btn-success">Continuar</a>
+                  <a href="../Libro/Transacciones/Vender/concretar.jsp" class="btn btn-success">Continuar</a>
                   <span class="btn btn-danger" id="cerrar">Cerrar</span>
               </div>
             </div>

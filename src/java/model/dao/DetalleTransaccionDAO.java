@@ -5,7 +5,6 @@
  */
 package model.dao;
 
-import model.dao.compra.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.dto.DetalleTransaccion;
 import model.dto.Libro;
-import model.dto.compra.DetalleCompra;
 import util.Conexion;
 
 /**
@@ -27,9 +25,9 @@ public class DetalleTransaccionDAO {
     }
     
     
-    public ArrayList<DetalleTransaccion> listar(){
-        ArrayList<DetalleTransaccion> lista = new ArrayList<DetalleTransaccion>();
-        DetalleTransaccion d;
+    public ArrayList<model.dto.DetalleTransaccion> listar(){
+        ArrayList<model.dto.DetalleTransaccion> lista = new ArrayList<model.dto.DetalleTransaccion>();
+        model.dto.DetalleTransaccion d;
         String q = "select\n" +
                     "t.isbn,t.nombre,\n" +
                     "i.desc_idioma,i.id_idioma,\n" +
@@ -43,7 +41,7 @@ public class DetalleTransaccionDAO {
         ResultSet rs=c.leerDatos(q);
         try {
             while (rs.next()){
-                d = new DetalleTransaccion();
+                d = new model.dto.DetalleTransaccion();
                 d.setIsbn(rs.getString(1));
                 d.setTitulo(rs.getString(2));
                 d.setIdioma(rs.getString(3));
@@ -86,9 +84,9 @@ public class DetalleTransaccionDAO {
         }
         return null;
     }
-    public DetalleTransaccion buscarPorNroSerie(int nro){
-        ArrayList<DetalleTransaccion> lista = new ArrayList<DetalleTransaccion>();
-        DetalleTransaccion d=null;
+    public model.dto.DetalleTransaccion buscarPorNroSerie(int nro){
+        ArrayList<model.dto.DetalleTransaccion> lista = new ArrayList<model.dto.DetalleTransaccion>();
+        model.dto.DetalleTransaccion d=null;
         String q = "select\n" +
                     "t.isbn,t.nombre,t.precio_referencia,\n" +
                     "i.desc_idioma,i.id_idioma\n" +
@@ -100,7 +98,7 @@ public class DetalleTransaccionDAO {
         ResultSet rs=c.leerDatos(q);
         try {
             while (rs.next()){
-                d = new DetalleTransaccion();
+                d = new model.dto.DetalleTransaccion();
                 d.setIsbn(rs.getString(1));
                 d.setTitulo(rs.getString(2));
                 d.setPrecio(rs.getInt(3));                
@@ -112,4 +110,39 @@ public class DetalleTransaccionDAO {
         }
         return d;
     }
+    public ArrayList<DetalleTransaccion> listarVentas(int id){
+        ArrayList<DetalleTransaccion> lista = new ArrayList<DetalleTransaccion>();
+        DetalleTransaccion d;
+        String q = "select \n" +
+                    "t.isbn,t.nombre,t.precio_referencia,\n" +
+                    "i.desc_idioma,i.id_idioma,\n" +
+                    "count(l.nro_serie),l.nro_serie\n" +
+                    "from libro_venta lv, libro l, titulo t, libro_idioma li, idioma i\n" +
+                    "where lv.id_venta="+id+"\n" +
+                    "and lv.nro_serie=l.nro_serie\n" +
+                    "and l.isbn=t.isbn\n" +
+                    "and l.nro_serie=li.nro_serie\n" +
+                    "and li.id_idioma=i.id_idioma\n" +
+                    "group by l.nro_serie;";
+        ResultSet rs=c.leerDatos(q);
+        try {
+            while (rs.next()){
+                d = new model.dto.DetalleTransaccion();
+                d.setIsbn(rs.getString(1));
+                d.setTitulo(rs.getString(2));
+                d.setPrecio(rs.getInt(3));
+                d.setIdioma(rs.getString(4));
+                d.setIdIdioma(rs.getInt(5));
+                d.setCantidad(rs.getInt(6));
+                d.setNroserie(rs.getInt(7));
+                
+                lista.add(d);
+            }
+            return lista;
+        } catch (SQLException ex) {
+            Logger.getLogger(DetalleTransaccionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
 }
