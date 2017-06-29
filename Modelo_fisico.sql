@@ -235,7 +235,7 @@ f_retorno_real date,
 f_arriendo date,
 costo_arriendo int,
 multa int,
-costo_total int
+costo_total int,
 constraint fk_detalle_arriendo_arriendo foreign key(id_arriendo) references arriendo(id_arriendo),
 constraint fk_detalle_arriendo_libro foreign key(nro_serie) references libro(nro_serie)
 );
@@ -248,7 +248,7 @@ insert into publicacion(desc_publicacion) values('Libro');
 insert into editorial(desc_editorial) values('Salesiana');
 insert into titulo values(9789750720475,'Relato de un naufrago','1967-06-01',10000,400,1,1);
 insert into titulo values(9789631420494,'Cien anos de soledad','1967-06-01',121212,600,1,1);
-	
+
 insert into distribuidor values(254126837,'Ramon Paris','Sta Elena 898','1234659',1995);
 
 insert into trabajador values(149871234,'Pepe','Lota','Grande','1995-06-01');
