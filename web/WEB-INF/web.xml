@@ -434,7 +434,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DevolverServlet</servlet-name>
-        <url-pattern>/Devolver</url-pattern>
+        <url-pattern>/Devolver/devolver</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DevolverServlet</servlet-name>
+        <url-pattern>/Devolver/insertar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

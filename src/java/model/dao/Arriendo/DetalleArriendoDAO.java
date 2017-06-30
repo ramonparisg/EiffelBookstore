@@ -46,7 +46,7 @@ public class DetalleArriendoDAO {
                 + "costo_total="+d.getTotal()+ " where "
                 + "id_arriendo="+d.getIdArriendo()+" and "
                 + "nro_serie="+d.getNroSerie()+";";
-        c.ejecutarSQL(q);
+        res =c.ejecutarSQL(q);
         return res;
     }
     

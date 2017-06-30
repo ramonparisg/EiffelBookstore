@@ -98,6 +98,7 @@ public class ArrendarServlet extends HttpServlet {
                 DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
                 Calendar cal = Calendar.getInstance();
                 String fechaArriendo = sdf.format(cal.getTime());
+                
                 MaquinaDelTiempo m = new MaquinaDelTiempo();
                 String fechaEstiDev = sdf.format(m.sumarRestarDiasFecha(cal.getTime(), 10));
                 
@@ -156,16 +157,13 @@ public class ArrendarServlet extends HttpServlet {
                 int idx = Integer.parseInt(request.getParameter("id"));                
                 Arriendo arr = arriendoDAO.buscar(idx);                                                
                 ArrayList<DetalleArriendo> listaDetalleA = detalleDAO.listarArriendo(arr.getId());
-                ArrayList<DetalleTransaccion> listaDetalleT =  new ArrayList<DetalleTransaccion>();
-                int price = 0;
-                for (DetalleArriendo det : listaDetalleA){
-                    price = price + (det.getTotal());
+                ArrayList<DetalleTransaccion> listaDetalleT =  new ArrayList<DetalleTransaccion>();                
+                for (DetalleArriendo det : listaDetalleA){                    
                     listaDetalleT.add(transaccionDAO.buscarPorNroSerie(det.getNroSerie()));
                 }
                 request.setAttribute("arriendo", arr);                
                 request.setAttribute("lista", listaDetalleA);
-                request.setAttribute("titulos", listaDetalleT);
-                request.setAttribute("total", price);
+                request.setAttribute("titulos", listaDetalleT);                
                 request.getRequestDispatcher("../Libro/Transacciones/Arrendar/recibo.jsp").forward(request, response);
                 break;
         }

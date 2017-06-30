@@ -53,6 +53,7 @@
         ´<h4>Arrendar</h4>
         <ul>
             <li><a href="Libro/Transacciones/Arrendar/index.jsp">Arrendar</a></li>            
+            <li><a href="Devolver/listar">Devolver</a></li>   
         </ul>
         
     </body>

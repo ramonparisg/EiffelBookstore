@@ -19,6 +19,16 @@ public class DetalleArriendo {
     private int total;
     private int multa;
 
+    public DetalleArriendo(int idArriendo, int nroSerie, String fDevReal, int total, int multa) {
+        this.idArriendo = idArriendo;
+        this.nroSerie = nroSerie;
+        this.fDevReal = fDevReal;
+        this.total = total;
+        this.multa = multa;
+    }
+
+    
+
     public DetalleArriendo(int idArriendo, int nroSerie, String fArriendo, String fDevEsti, String fDevReal, int subtotal, int total, int multa) {
         this.idArriendo = idArriendo;
         this.nroSerie = nroSerie;

@@ -20,15 +20,14 @@
             
         %>
         
-        <h1 class="text-center">Arriendo</h1>
-        <div class="container">
-            <p><a href="<%=request.getContextPath() %>/Arrendar/listarDisponibles" class="glyphicon glyphicon-plus btn btn-success" ></a></p>
+        <h1 class="text-center">Arriendos</h1>
+        <div class="container">            
             <table class="table">
                 <thead>
                     <th>ID de Arriendo</th>                       
                     <th>Rut Cliente</th>                                   
                     <th>Rut Trabajador</th>
-                    <th>Acciones</th>
+                    <th>Devolver</th>
                 </thead>
                 
                     <% for (Arriendo a : lista){%>
@@ -37,7 +36,7 @@
                         <td><%=a.getRutCliente() %></td>
                         <td><%=a.getRutTrabajador() %></td>
                         <td>                        
-                        <a href="<%=request.getContextPath()%>/Arrendar/recibo?id=<%=a.getId() %>" class="btn btn-warning"><i class="fa fa-eye" aria-hidden="true"></i></a> 
+                        <a href="<%=request.getContextPath()%>/Devolver/devolver?id=<%=a.getId() %>" class="btn btn-info"><i class="fa fa-envelope" aria-hidden="true"></i></a> 
                         </td> 
                     </tbody>
                     <% }%>
