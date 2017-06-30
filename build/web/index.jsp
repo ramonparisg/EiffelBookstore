@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>INDEX</title>
     </head>
     <body>
         <h1>Mantenedores</h1>
@@ -50,7 +50,10 @@
                 <li><a href="Libro/Persona/index.jsp?tabla=Trabajador">Trabajador</a></li>                
             </ul>
         </ul>
-        
+        ´<h4>Arrendar</h4>
+        <ul>
+            <li><a href="Libro/Transacciones/Arrendar/index.jsp">Arrendar</a></li>            
+        </ul>
         
     </body>
 </html>

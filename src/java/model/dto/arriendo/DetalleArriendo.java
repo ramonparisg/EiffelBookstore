@@ -16,21 +16,21 @@ public class DetalleArriendo {
     private String fDevEsti;
     private String fDevReal;
     private int subtotal;
-    private int iva;
+    private int total;
     private int multa;
 
-    public DetalleArriendo() {
-    }
-
-    public DetalleArriendo(int idArriendo, int nroSerie, String fArriendo, String fDevEsti, String fDevReal, int subtotal, int iva, int multa) {
+    public DetalleArriendo(int idArriendo, int nroSerie, String fArriendo, String fDevEsti, String fDevReal, int subtotal, int total, int multa) {
         this.idArriendo = idArriendo;
         this.nroSerie = nroSerie;
         this.fArriendo = fArriendo;
         this.fDevEsti = fDevEsti;
         this.fDevReal = fDevReal;
         this.subtotal = subtotal;
-        this.iva = iva;
+        this.total = total;
         this.multa = multa;
+    }
+
+    public DetalleArriendo() {
     }
 
     public int getIdArriendo() {
@@ -81,12 +81,12 @@ public class DetalleArriendo {
         this.subtotal = subtotal;
     }
 
-    public int getIva() {
-        return iva;
+    public int getTotal() {
+        return total;
     }
 
-    public void setIva(int iva) {
-        this.iva = iva;
+    public void setTotal(int total) {
+        this.total = total;
     }
 
     public int getMulta() {
@@ -96,5 +96,6 @@ public class DetalleArriendo {
     public void setMulta(int multa) {
         this.multa = multa;
     }
+
     
 }

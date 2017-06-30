@@ -54,7 +54,7 @@ public class ArriendoDAO {
         return a;
     }
     
-    public ArrayList<Arriendo> listar(int id){
+    public ArrayList<Arriendo> listar(){
         Arriendo a = null;
         String q = "Select * from arriendo";
         ArrayList<Arriendo> lista = new ArrayList<Arriendo>();

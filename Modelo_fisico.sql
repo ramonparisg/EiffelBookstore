@@ -241,7 +241,11 @@ constraint fk_detalle_arriendo_libro foreign key(nro_serie) references libro(nro
 );
 
 insert into idioma(desc_idioma) values('Espanol');
+insert into idioma(desc_idioma) values('Ingles');
+insert into idioma(desc_idioma) values('Frances');
 insert into estado(desc_estado) values('Disponible');
+insert into estado(desc_estado) values('Vendido');
+insert into estado(desc_estado) values('Arrendado');
 insert into metodo_pago(desc_metodo_pago) values('Efectivo');
 insert into metodo_pago(desc_metodo_pago) values('Tarjeta de Credito');
 insert into publicacion(desc_publicacion) values('Libro');

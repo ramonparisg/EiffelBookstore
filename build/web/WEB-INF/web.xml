@@ -61,6 +61,14 @@
         <servlet-name>VenderServlet</servlet-name>
         <servlet-class>controller.VenderServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ArrendarServlet</servlet-name>
+        <servlet-class>controller.ArrendarServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DevolverServlet</servlet-name>
+        <servlet-class>controller.DevolverServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TituloServlet</servlet-name>
         <url-pattern>/Titulo/listar</url-pattern>
@@ -391,7 +399,43 @@
         <servlet-name>VenderServlet</servlet-name>
         <url-pattern>/Vender/listarDisponibles</url-pattern>
     </servlet-mapping>
-    
+    <!--***************************** ARRENDAR *************************** -->
+    <servlet-mapping>
+        <servlet-name>ArrendarServlet</servlet-name>
+        <url-pattern>/Arrendar/insertar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ArrendarServlet</servlet-name>
+        <url-pattern>/Arrendar/listar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ArrendarServlet</servlet-name>
+        <url-pattern>/Arrendar/recibo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ArrendarServlet</servlet-name>
+        <url-pattern>/Arrendar/agregarLibro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ArrendarServlet</servlet-name>
+        <url-pattern>/Arrendar/eliminarLibro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ArrendarServlet</servlet-name>
+        <url-pattern>/Arrendar/mostrarLibro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ArrendarServlet</servlet-name>
+        <url-pattern>/Arrendar/listarDisponibles</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DevolverServlet</servlet-name>
+        <url-pattern>/Devolver/listar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DevolverServlet</servlet-name>
+        <url-pattern>/Devolver</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
